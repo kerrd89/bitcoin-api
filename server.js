@@ -1,9 +1,8 @@
 'use strict';
 
 const express = require('express');
-const fs = require('fs');
 const app = express();
-const http = require('http').Server(app);
+const fs = require('fs');
 const cors = require('express-cors');
 const bodyParser = require('body-parser');
 
@@ -12,13 +11,17 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
 app.set('port', process.env.PORT || 3000);
-app.locals.title = 'Mirror Mirror On The Wall';
+app.locals.title = 'shapeshift technical challenge';
 
-app.get('/', (request, response) => {
-  fs.readFile(`${__dirname}/public/index.html`, (err, file) => {
-    response.send(file);
-  });
+
+app.get('/api/:id', (request, response) => {
+  let transactions = pullTransactionHistory(request.params.id);
+  response.send({ data: transactions });
 });
+
+const pullTransactionHistory = (user) => {
+  return user;
+};
 
 if (!module.parent) {
   app.listen(app.get('port'), () => {
@@ -27,3 +30,19 @@ if (!module.parent) {
 }
 
 module.exports = app;
+
+
+
+
+
+// app.get('/', (request, response) => {
+//   fs.readFile(`${__dirname}/public/index.html`, (err, file) => {
+//     response.send(file);
+//   });
+// });
+//
+// app.get('/test/', (request, response) => {
+//   fs.readFile(`${__dirname}/public/index.html`, (err, file) => {
+//     response.send(file);
+//   });
+// });
