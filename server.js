@@ -1,5 +1,5 @@
 'use strict';
-
+const axios = require('axios');
 const express = require('express');
 const app = express();
 const fs = require('fs');
@@ -13,15 +13,16 @@ app.use(express.static('public'));
 app.set('port', process.env.PORT || 3000);
 app.locals.title = 'shapeshift technical challenge';
 
+const pullTransactionHistory = (user) => {
+  if (!user) return null;
+  return axios.get(`https://blockchain.info/address/${user}?format=json&limit=5`);
+};
 
 app.get('/api/:id', (request, response) => {
-  let transactions = pullTransactionHistory(request.params.id);
-  response.send({ data: transactions });
+  pullTransactionHistory('1AJbsFZ64EpEfS5UAjAfcUG8pH8Jn3rn1F')
+    .then(r => response.send({data: r.data}))
+    .catch(err => console.log(err));
 });
-
-const pullTransactionHistory = (user) => {
-  return user;
-};
 
 if (!module.parent) {
   app.listen(app.get('port'), () => {
@@ -30,19 +31,3 @@ if (!module.parent) {
 }
 
 module.exports = app;
-
-
-
-
-
-// app.get('/', (request, response) => {
-//   fs.readFile(`${__dirname}/public/index.html`, (err, file) => {
-//     response.send(file);
-//   });
-// });
-//
-// app.get('/test/', (request, response) => {
-//   fs.readFile(`${__dirname}/public/index.html`, (err, file) => {
-//     response.send(file);
-//   });
-// });
