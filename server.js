@@ -1,10 +1,10 @@
 'use strict';
 const axios = require('axios');
 const express = require('express');
-const app = express();
-const fs = require('fs');
-const cors = require('express-cors');
+const cors = require('cors');
 const bodyParser = require('body-parser');
+
+const app = express();
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -18,8 +18,8 @@ const pullTransactionHistory = (user) => {
   return axios.get(`https://blockchain.info/address/${user}?format=json&limit=5`);
 };
 
-app.get('/api/:id', (request, response) => {
-  pullTransactionHistory('1AJbsFZ64EpEfS5UAjAfcUG8pH8Jn3rn1F')
+app.get('/api/:address', (request, response) => {
+  pullTransactionHistory(request.params.address)
     .then(r => response.send({data: r.data}))
     .catch(err => console.log(err));
 });
