@@ -11,7 +11,7 @@ module.exports = {
   },
   module: {
     loaders: [
-      { test: /\.css$/, loader: 'style!css' },
+      { test: /\.css$/, loader: "style-loader!css-loader" },
       { test: /\.js?$/, exclude: /(node_modules)/,
         loader: 'babel-loader',
         query: {
@@ -22,6 +22,6 @@ module.exports = {
   },
   resolve: {
     modules: ['node_modules'],
-    extensions: ['.js', '.json', '.jsx', '.css']
+    extensions: ['.js', '.json', '.jsx', '.css', '.scss']
   }
 };

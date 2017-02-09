@@ -20,7 +20,7 @@ const pullTransactionHistory = (user) => {
 
 app.get('/api/:address', (request, response) => {
   pullTransactionHistory(request.params.address)
-    .then(r => response.send({data: r.data}))
+    .then(r => response.send({ data: r.data }))
     .catch(err => console.log(err));
 });
 
