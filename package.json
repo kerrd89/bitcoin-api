@@ -4,9 +4,8 @@
   "description": "technical challenge for shapeshift",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --hot --inline --content-base ./public",
     "build": "webpack",
-    "server": "nodemon server.js"
+    "start": "nodemon server.js"
   },
   "repository": {
     "type": "git",

@@ -19,17 +19,30 @@ const pullTransactionHistory = (user) => {
   return axios.get(`https://blockchain.info/address/${user}?format=json&limit=5`);
 };
 
-app.get('/', (request, response) => {
+app.get(['/'], (request, response) => {
   fs.readFile(`${__dirname}/public/index.html`, (err, file) => {
+    response.send(file);
+  });
+});
+
+app.get('/:token', (request, response) => {
+  fs.readFile(`${__dirname}/public/index.html`, 'utf8', (err, file) => {
     response.send(file);
   });
 });
 
 app.get('/api/:address', (request, response) => {
   pullTransactionHistory(request.params.address)
-    .then(r => response.send({ data: r.data }))
+    .then(r => response.send({ txs: r.data }))
     .catch(err => console.log(err));
 });
+
+app.get('/api/rates/all', (request, response) => {
+  axios.get('https://blockchain.info/ticker')
+    .then(r => response.send({ rates: r.data }))
+    .catch(err => console.log(err));
+});
+
 
 if (!module.parent) {
   app.listen(app.get('port'), () => {
