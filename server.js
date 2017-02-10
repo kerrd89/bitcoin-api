@@ -14,9 +14,9 @@ app.use(express.static('public'));
 app.set('port', process.env.PORT || 3000);
 app.locals.title = 'shapeshift technical challenge';
 
-const pullTransactionHistory = (user) => {
+const pullTransactionHistory = (user, count) => {
   if (!user) return null;
-  return axios.get(`https://blockchain.info/address/${user}?format=json&limit=5`);
+  return axios.get(`https://blockchain.info/address/${user}?format=json&limit=${count}`);
 };
 
 app.get(['/'], (request, response) => {
@@ -32,7 +32,7 @@ app.get('/:token', (request, response) => {
 });
 
 app.get('/api/:address', (request, response) => {
-  pullTransactionHistory(request.params.address)
+  pullTransactionHistory(request.params.address, 25)
     .then(r => response.send({ txs: r.data }))
     .catch(err => console.log(err));
 });

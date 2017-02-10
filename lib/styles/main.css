@@ -14,6 +14,7 @@ header {
   margin: 10px auto;
   width: 90%;
   text-align: center;
+  font-size: .8em;
 }
 
 h1 {
@@ -26,13 +27,16 @@ input {
 }
 
 button {
-  padding: 5px;
+  padding: 10px;
   font-size: 1em;
+  font-weight: bold;
+  margin-left: 10px;
 }
 
 table {
   margin: 10px auto;
 }
+
 form {
   display: inline;
   margin: auto;
@@ -49,6 +53,11 @@ td {
   padding: 5px;
   border: 1px solid black;
   font-size: 1em;
+  text-align: center;
+}
+
+tr:hover {
+  background-color: #EF9A9A;
 }
 
 .USD::before {
