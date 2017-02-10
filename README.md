@@ -1,6 +1,6 @@
 # bitcoin-api
 
-### Live production application can be found [here](http://bitcoin-received.herokuapp.com/1AJbsFZ64EpEfS5UAjAfcUG8pH8Jn3rn1F)
+### Live production application can be found [here](http://bitcoin-received.herokuapp.com/1AJbsFZ64EpEfS5UAjAfcUG8pH8Jn3rn1F), routed to an existing wallet for demonstration.
 
 ### Technologies: React, React-Router, Node
 
